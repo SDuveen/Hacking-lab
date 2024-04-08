@@ -101,14 +101,14 @@ class Subframe3_Word9:
 
 @dataclass
 class Subframe3_Word10:
-    iode_lsb = [ 0, 0, 0, 0, 0, 0, 0, 0 ]
+    issue_of_data_ephemeris = [ 0, 0, 0, 0, 0, 0, 0, 0 ]
     idot = [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ]
     parity_bits: list[int] # 2 bits
     parity:      list[int] # 6 bits
 
     def __init__(self, parity_bits, D29, D30):
         self.parity_bits = parity_bits
-        self.parity = calculate_parity_bits(data_bits=self.iode_lsb + self.idot + self.parity_bits, previous_D29=D29, previous_D30=D30, first_word=False)
+        self.parity = calculate_parity_bits(data_bits=self.issue_of_data_ephemeris + self.idot + self.parity_bits, previous_D29=D29, previous_D30=D30, first_word=False)
 
 @dataclass
 class Subframe3:
@@ -145,7 +145,7 @@ class Subframe3:
         self.data += self.word7.c_rc + self.word7.omega_msb + self.word7.parity
         self.data += self.word8.omega_lsb + self.word8.parity
         self.data += self.word9.ascension_rate + self.word9.parity
-        self.data += self.word10.iode_lsb + self.word10.idot + self.word10.parity_bits + self.word10.parity
+        self.data += self.word10.issue_of_data_ephemeris + self.word10.idot + self.word10.parity_bits + self.word10.parity
 
     def __str__(self):
         return f"""{''.join(map(str, (self.word1.preamble + self.word1.reserved + self.word1.parity)))}
@@ -157,4 +157,4 @@ class Subframe3:
 {''.join(map(str, (self.word7.c_rc + self.word7.omega_msb + self.word7.parity)))}
 {''.join(map(str, (self.word8.omega_lsb + self.word8.parity)))}
 {''.join(map(str, (self.word9.ascension_rate + self.word9.parity)))}
-{''.join(map(str, (self.word10.iode_lsb + self.word10.idot + self.word10.parity_bits + self.word10.parity)))}"""
+{''.join(map(str, (self.word10.issue_of_data_ephemeris + self.word10.idot + self.word10.parity_bits + self.word10.parity)))}"""
