@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from .utils import calculate_parity_bits, gps_time, int_to_bits
+from .utils import calculate_parity_bits, gps_time, int_to_bits, random_bits
 
 def create_subframe1(date):
     week_number, time_of_week = gps_time(date)
@@ -44,9 +44,9 @@ class Subframe1_Word2:
 class Subframe1_Word3:
     week_number:   list[int] # 10 bits
     p_or_ca_code = [ 1, 0 ]
-    ura_index = [ 0, 0, 0, 0 ]
-    sv_health = [ 0, 0, 0, 0, 0, 0 ]
-    issue_of_data_clock = [ 0, 0 ]
+    ura_index = random_bits(4)
+    sv_health = random_bits(6)
+    issue_of_data_clock = random_bits(2)
     parity:              list[int] # 6 bits
 
     def __init__(self, week_number, D29, D30):
@@ -56,7 +56,7 @@ class Subframe1_Word3:
 @dataclass
 class Subframe1_Word4:
     use_p_code = [ 0 ]
-    reserved = [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ]
+    reserved = random_bits(23)
     parity:     list[int] # 6 bits
 
     def __init__(self, D29, D30):
@@ -64,7 +64,7 @@ class Subframe1_Word4:
 
 @dataclass
 class Subframe1_Word5:
-    reserved = [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ]
+    reserved = random_bits(24)
     parity:     list[int] # 6 bits
 
     def __init__(self, D29, D30):
@@ -72,7 +72,7 @@ class Subframe1_Word5:
 
 @dataclass
 class Subframe1_Word6:
-    reserved = [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ]
+    reserved = random_bits(24)
     parity:     list[int] # 6 bits
 
     def __init__(self, D29, D30):
@@ -80,8 +80,8 @@ class Subframe1_Word6:
 
 @dataclass
 class Subframe1_Word7:
-    reserved = [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ]
-    t_gd = [ 0, 0, 0, 0, 0, 0, 0, 0 ]
+    reserved = random_bits(16)
+    t_gd = random_bits(8)
     parity:     list[int] # 6 bits
 
     def __init__(self, D29, D30):
@@ -90,7 +90,7 @@ class Subframe1_Word7:
 @dataclass
 class Subframe1_Word8:
     issue_of_data_clock = [ 0, 0, 0, 0, 0, 0, 0, 0 ]
-    time_of_clock       = [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ]
+    time_of_clock       = random_bits(16)
     parity: list[int]   # 6 bits
 
     def __init__(self, D29, D30):   
@@ -98,8 +98,8 @@ class Subframe1_Word8:
 
 @dataclass
 class Subframe1_Word9:
-    a_f2 = [ 0, 0, 0, 0, 0, 0, 0, 0 ]
-    a_f1 = [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ]
+    a_f2 = random_bits(8)
+    a_f1 = random_bits(16)
     parity: list[int] # 6 bits
 
     def __init__(self, D29, D30):
@@ -107,7 +107,7 @@ class Subframe1_Word9:
 
 @dataclass
 class Subframe1_Word10:
-    a_f0 = [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ]
+    a_f0 = random_bits(22)
     parity_bits: list[int] # 2 bits
     parity:      list[int] # 6 bits
 

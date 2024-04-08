@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from .utils import calculate_parity_bits, gps_time, int_to_bits
+from .utils import calculate_parity_bits, gps_time, int_to_bits, random_bits
 
 def create_subframe3(date):
     week_number, time_of_week = gps_time(date)
@@ -42,8 +42,8 @@ class Subframe3_Word2:
 
 @dataclass
 class Subframe3_Word3:
-    c_ic        = [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ]
-    omega_0_msb = [ 0, 0, 0, 0, 0, 0, 0, 0 ]
+    c_ic        = random_bits(16)
+    omega_0_msb = random_bits(8)
     parity: list[int] # 6 bits
 
     def __init__(self, D29, D30):
@@ -51,7 +51,7 @@ class Subframe3_Word3:
 
 @dataclass
 class Subframe3_Word4:
-    omega_0_lsb = [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ]
+    omega_0_lsb = random_bits(24)
     parity: list[int] # 6 bits
 
     def __init__(self, D29, D30):
@@ -59,8 +59,8 @@ class Subframe3_Word4:
 
 @dataclass
 class Subframe3_Word5:
-    c_is    = [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ]
-    i_0_msb = [ 0, 0, 0, 0, 0, 0, 0, 0 ]
+    c_is    = random_bits(16)
+    i_0_msb = random_bits(8)
     parity:     list[int] # 6 bits
 
     def __init__(self, D29, D30):
@@ -68,7 +68,7 @@ class Subframe3_Word5:
 
 @dataclass
 class Subframe3_Word6:
-    i_0_lsb = [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ]
+    i_0_lsb = random_bits(24)
     parity:     list[int] # 6 bits
 
     def __init__(self, D29, D30):
@@ -76,8 +76,8 @@ class Subframe3_Word6:
 
 @dataclass
 class Subframe3_Word7:
-    c_rc = [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ]
-    omega_msb = [ 0, 0, 0, 0, 0, 0, 0, 0 ]
+    c_rc = random_bits(16)
+    omega_msb = random_bits(8)
     parity:     list[int] # 6 bits
 
     def __init__(self, D29, D30):
@@ -85,7 +85,7 @@ class Subframe3_Word7:
 
 @dataclass
 class Subframe3_Word8:
-    omega_lsb = [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ]
+    omega_lsb = random_bits(24)
     parity: list[int]   # 6 bits
 
     def __init__(self, D29, D30):   
@@ -93,7 +93,7 @@ class Subframe3_Word8:
 
 @dataclass
 class Subframe3_Word9:
-    ascension_rate = [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ]
+    ascension_rate = random_bits(24)
     parity: list[int] # 6 bits
 
     def __init__(self, D29, D30):
@@ -102,7 +102,7 @@ class Subframe3_Word9:
 @dataclass
 class Subframe3_Word10:
     issue_of_data_ephemeris = [ 0, 0, 0, 0, 0, 0, 0, 0 ]
-    idot = [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ]
+    idot = random_bits(14)
     parity_bits: list[int] # 2 bits
     parity:      list[int] # 6 bits
 

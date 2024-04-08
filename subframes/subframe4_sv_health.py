@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from .utils import calculate_parity_bits, gps_time, int_to_bits
+from .utils import calculate_parity_bits, gps_time, int_to_bits, random_bits
 
 def create_subframe4_sv_health(date):
     week_number, time_of_week = gps_time(date)
@@ -42,11 +42,11 @@ class Subframe4_Word2:
 
 @dataclass
 class Subframe4_Word3:
-    unknown = [ 0, 0, 0, 0, 0, 0, 0, 0 ]
-    as_flag_sv_config1 = [ 0, 0, 0, 0 ]
-    as_flag_sv_config2 = [ 0, 0, 0, 0 ]
-    as_flag_sv_config3 = [ 0, 0, 0, 0 ]
-    as_flag_sv_config4 = [ 0, 0, 0, 0 ]
+    unknown = random_bits(8)
+    as_flag_sv_config1 = random_bits(4)
+    as_flag_sv_config2 = random_bits(4)
+    as_flag_sv_config3 = random_bits(4)
+    as_flag_sv_config4 = random_bits(4)
     parity: list[int] # 6 bits
 
     def __init__(self, D29, D30):
@@ -54,12 +54,12 @@ class Subframe4_Word3:
 
 @dataclass
 class Subframe4_Word4:
-    as_flag_sv_config5 = [ 0, 0, 0, 0 ]
-    as_flag_sv_config6 = [ 0, 0, 0, 0 ]
-    as_flag_sv_config7 = [ 0, 0, 0, 0 ]
-    as_flag_sv_config8 = [ 0, 0, 0, 0 ]
-    as_flag_sv_config9 = [ 0, 0, 0, 0 ]
-    as_flag_sv_config10 = [ 0, 0, 0, 0 ]
+    as_flag_sv_config5 = random_bits(4)
+    as_flag_sv_config6 = random_bits(4)
+    as_flag_sv_config7 = random_bits(4)
+    as_flag_sv_config8 = random_bits(4)
+    as_flag_sv_config9 = random_bits(4)
+    as_flag_sv_config10 = random_bits(4)
     parity:     list[int] # 6 bits
 
     def __init__(self, D29, D30):
@@ -67,12 +67,12 @@ class Subframe4_Word4:
 
 @dataclass
 class Subframe4_Word5:
-    as_flag_sv_config11 = [ 0, 0, 0, 0 ]
-    as_flag_sv_config12 = [ 0, 0, 0, 0 ]
-    as_flag_sv_config13 = [ 0, 0, 0, 0 ]
-    as_flag_sv_config14 = [ 0, 0, 0, 0 ]
-    as_flag_sv_config15 = [ 0, 0, 0, 0 ]
-    as_flag_sv_config16 = [ 0, 0, 0, 0 ]
+    as_flag_sv_config11 = random_bits(4)
+    as_flag_sv_config12 = random_bits(4)
+    as_flag_sv_config13 = random_bits(4)
+    as_flag_sv_config14 = random_bits(4)
+    as_flag_sv_config15 = random_bits(4)
+    as_flag_sv_config16 = random_bits(4)
     parity:     list[int] # 6 bits
 
     def __init__(self, D29, D30):
@@ -80,12 +80,12 @@ class Subframe4_Word5:
 
 @dataclass
 class Subframe4_Word6:
-    as_flag_sv_config17 = [ 0, 0, 0, 0 ]
-    as_flag_sv_config18 = [ 0, 0, 0, 0 ]
-    as_flag_sv_config19 = [ 0, 0, 0, 0 ]
-    as_flag_sv_config20 = [ 0, 0, 0, 0 ]
-    as_flag_sv_config21 = [ 0, 0, 0, 0 ]
-    as_flag_sv_config22 = [ 0, 0, 0, 0 ]
+    as_flag_sv_config17 = random_bits(4)
+    as_flag_sv_config18 = random_bits(4)
+    as_flag_sv_config19 = random_bits(4)
+    as_flag_sv_config20 = random_bits(4)
+    as_flag_sv_config21 = random_bits(4)
+    as_flag_sv_config22 = random_bits(4)
     parity:     list[int] # 6 bits
 
     def __init__(self, D29, D30):
@@ -93,12 +93,12 @@ class Subframe4_Word6:
 
 @dataclass
 class Subframe4_Word7:
-    as_flag_sv_config23 = [ 0, 0, 0, 0 ]
-    as_flag_sv_config24 = [ 0, 0, 0, 0 ]
-    as_flag_sv_config25 = [ 0, 0, 0, 0 ]
-    as_flag_sv_config26 = [ 0, 0, 0, 0 ]
-    as_flag_sv_config27 = [ 0, 0, 0, 0 ]
-    as_flag_sv_config28 = [ 0, 0, 0, 0 ]
+    as_flag_sv_config23 = random_bits(4)
+    as_flag_sv_config24 = random_bits(4)
+    as_flag_sv_config25 = random_bits(4)
+    as_flag_sv_config26 = random_bits(4)
+    as_flag_sv_config27 = random_bits(4)
+    as_flag_sv_config28 = random_bits(4)
     parity:     list[int] # 6 bits
 
     def __init__(self, D29, D30):
@@ -106,11 +106,11 @@ class Subframe4_Word7:
 
 @dataclass
 class Subframe4_Word8:
-    as_flag_sv_config29 = [ 0, 0, 0, 0 ]
-    as_flag_sv_config30 = [ 0, 0, 0, 0 ]
-    as_flag_sv_config31 = [ 0, 0, 0, 0 ]
-    as_flag_sv_config32 = [ 0, 0, 0, 0 ]
-    unknown = [ 0, 0, 0, 0, 0, 0, 0, 0 ]
+    as_flag_sv_config29 = random_bits(4)
+    as_flag_sv_config30 = random_bits(4)
+    as_flag_sv_config31 = random_bits(4)
+    as_flag_sv_config32 = random_bits(4)
+    unknown = random_bits(8)
     parity: list[int]   # 6 bits
 
     def __init__(self, D29, D30):   
@@ -118,10 +118,10 @@ class Subframe4_Word8:
 
 @dataclass
 class Subframe4_Word9:
-    sv_25 = [ 0, 0, 0, 0, 0, 0 ]
-    sv_26 = [ 0, 0, 0, 0, 0, 0 ]
-    sv_27 = [ 0, 0, 0, 0, 0, 0 ]
-    sv_28 = [ 0, 0, 0, 0, 0, 0 ]
+    sv_25 = random_bits(6)
+    sv_26 = random_bits(6)
+    sv_27 = random_bits(6)
+    sv_28 = random_bits(6)
     parity: list[int] # 6 bits
 
     def __init__(self, D29, D30):
@@ -129,10 +129,10 @@ class Subframe4_Word9:
 
 @dataclass
 class Subframe4_Word10:
-    sv_29 = [ 0, 0, 0, 0, 0, 0 ]
-    sv_30 = [ 0, 0, 0, 0, 0, 0 ]
-    sv_31 = [ 0, 0, 0, 0, 0, 0 ]
-    sv_32 = [ 0, 0, 0, 0, 0, 0 ]
+    sv_29 = random_bits(6)
+    sv_30 = random_bits(6)
+    sv_31 = random_bits(6)
+    sv_32 = random_bits(6)
     parity:      list[int] # 6 bits
 
     def __init__(self, D29, D30):

@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from .utils import calculate_parity_bits, gps_time, int_to_bits
+from .utils import calculate_parity_bits, gps_time, int_to_bits, random_bits
 
 def create_subframe5_sv(page, date):
     week_number, time_of_week = gps_time(date)
@@ -20,7 +20,7 @@ def create_subframe5_sv(page, date):
 @dataclass
 class Subframe5_Word1:
     preamble          = [ 1, 0, 0, 0, 1, 0, 1, 1 ]
-    reserved          = [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ]
+    reserved          = random_bits(16)
     parity: list[int] # 6 bits
 
     def __init__(self):
@@ -42,9 +42,9 @@ class Subframe5_Word2:
 
 @dataclass
 class Subframe5_Word3:
-    data_id = [ 0, 0 ]
+    data_id = random_bits(2)
     sv_id:   list[int] # 6 bits
-    eccentricity = [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ]
+    eccentricity = random_bits(16)
     parity: list[int] # 6 bits
 
     def __init__(self, page, D29, D30):
@@ -80,8 +80,8 @@ class Subframe5_Word3:
 
 @dataclass
 class Subframe5_Word4:
-    time_of_ephemeris = [ 0, 0, 0, 0, 0, 0, 0, 0 ]
-    delta_inclination = [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ]
+    time_of_ephemeris = random_bits(8)
+    delta_inclination = random_bits(16)
     parity:     list[int] # 6 bits
 
     def __init__(self, D29, D30):
@@ -89,8 +89,8 @@ class Subframe5_Word4:
 
 @dataclass
 class Subframe5_Word5:
-    rate_of_right_ascension = [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ]
-    sv_health               = [ 0, 0, 0, 0, 0, 0, 0, 0 ]
+    rate_of_right_ascension = random_bits(16)
+    sv_health               = random_bits(8)
     parity:     list[int] # 6 bits
 
     def __init__(self, D29, D30):
@@ -98,7 +98,7 @@ class Subframe5_Word5:
 
 @dataclass
 class Subframe5_Word6:
-    sqrt_a = [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ]
+    sqrt_a = random_bits(24)
     parity:     list[int] # 6 bits
 
     def __init__(self, D29, D30):
@@ -106,7 +106,7 @@ class Subframe5_Word6:
 
 @dataclass
 class Subframe5_Word7:
-    longitude_of_ascension_node = [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ]
+    longitude_of_ascension_node = random_bits(24)
     parity:     list[int] # 6 bits
 
     def __init__(self, D29, D30):
@@ -114,7 +114,7 @@ class Subframe5_Word7:
 
 @dataclass
 class Subframe5_Word8:
-    argument_of_perigee = [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ]
+    argument_of_perigee = random_bits(24)
     parity: list[int]   # 6 bits
 
     def __init__(self, D29, D30):   
@@ -122,7 +122,7 @@ class Subframe5_Word8:
 
 @dataclass
 class Subframe5_Word9:
-    mean_anomaly = [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ]
+    mean_anomaly = random_bits(24)
     parity: list[int] # 6 bits
 
     def __init__(self, D29, D30):
@@ -130,9 +130,9 @@ class Subframe5_Word9:
 
 @dataclass
 class Subframe5_Word10:
-    a_f0_msb = [ 0, 0, 0, 0, 0, 0, 0, 0 ]
-    a_f1     = [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ]
-    a_f0_lsb = [ 0, 0, 0 ]
+    a_f0_msb = random_bits(8)
+    a_f1     = random_bits(11)
+    a_f0_lsb = random_bits(3)
     parity_bits: list[int] # 2 bits
     parity:      list[int] # 6 bits
 

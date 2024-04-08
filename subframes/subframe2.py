@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from .utils import calculate_parity_bits, gps_time, int_to_bits
+from .utils import calculate_parity_bits, gps_time, int_to_bits, random_bits
 
 def create_subframe2(date):
     week_number, time_of_week = gps_time(date)
@@ -43,7 +43,7 @@ class Subframe2_Word2:
 @dataclass
 class Subframe2_Word3:
     issue_of_data_ephemeris = [ 0, 0, 0, 0, 0, 0, 0, 0 ]
-    c_rs                    = [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ]
+    c_rs                    = random_bits(16)
     parity: list[int]       # 6 bits
 
     def __init__(self, D29, D30):
@@ -51,8 +51,8 @@ class Subframe2_Word3:
 
 @dataclass
 class Subframe2_Word4:
-    delta_n = [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ]
-    m_0_msb = [ 0, 0, 0, 0, 0, 0, 0, 0 ]
+    delta_n = random_bits(16)
+    m_0_msb = random_bits(8)
     parity: list[int] # 6 bits
 
     def __init__(self, D29, D30):
@@ -60,7 +60,7 @@ class Subframe2_Word4:
 
 @dataclass
 class Subframe2_Word5:
-    m0_lsb = [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ]
+    m0_lsb = random_bits(24)
     parity:     list[int] # 6 bits
 
     def __init__(self, D29, D30):
@@ -68,8 +68,8 @@ class Subframe2_Word5:
 
 @dataclass
 class Subframe2_Word6:
-    c_uc = [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ]
-    e_msb = [ 0, 0, 0, 0, 0, 0, 0, 0 ]
+    c_uc = random_bits(16)
+    e_msb = random_bits(8)
     parity:     list[int] # 6 bits
 
     def __init__(self, D29, D30):
@@ -77,7 +77,7 @@ class Subframe2_Word6:
 
 @dataclass
 class Subframe2_Word7:
-    e_lsb = [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ]
+    e_lsb = random_bits(24)
     parity:     list[int] # 6 bits
 
     def __init__(self, D29, D30):
@@ -85,8 +85,8 @@ class Subframe2_Word7:
 
 @dataclass
 class Subframe2_Word8:
-    c_us = [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ]
-    sqrt_a_msb = [ 0, 0, 0, 0, 0, 0, 0, 0 ]
+    c_us = random_bits(16)
+    sqrt_a_msb = random_bits(8)
     parity: list[int]   # 6 bits
 
     def __init__(self, D29, D30):   
@@ -94,7 +94,7 @@ class Subframe2_Word8:
 
 @dataclass
 class Subframe2_Word9:
-    sqrt_a_lsb = [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ]
+    sqrt_a_lsb = random_bits(24)
     parity: list[int] # 6 bits
 
     def __init__(self, D29, D30):
@@ -102,9 +102,9 @@ class Subframe2_Word9:
 
 @dataclass
 class Subframe2_Word10:
-    t_oe = [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ]
+    t_oe = random_bits(16)
     fit_interval_flag = [ 0 ]
-    age_of_data_offset = [ 0, 0, 0, 0, 0, 0, 0 ]
+    age_of_data_offset = random_bits(7)
     parity:      list[int] # 6 bits
 
     def __init__(self, D29, D30):

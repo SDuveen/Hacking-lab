@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from .utils import calculate_parity_bits, gps_time, int_to_bits
+from .utils import calculate_parity_bits, gps_time, int_to_bits, random_bits
 
 def create_subframe4_nmct(date):
     week_number, time_of_week = gps_time(date)
@@ -42,11 +42,11 @@ class Subframe4_Word2:
 
 @dataclass
 class Subframe4_Word3:
-    unknown = [ 0, 0, 0, 0, 0, 0, 0, 0 ]
-    ai = [ 0, 0 ]
-    erd1 = [ 0, 0, 0, 0, 0, 0 ]
-    erd2 = [ 0, 0, 0, 0, 0, 0 ]
-    erd3_msb = [ 0, 0 ]
+    unknown = random_bits(8)
+    ai = random_bits(2)
+    erd1 = random_bits(6)
+    erd2 = random_bits(6)
+    erd3_msb = random_bits(2)
     parity: list[int] # 6 bits
 
     def __init__(self, D29, D30):
@@ -54,11 +54,11 @@ class Subframe4_Word3:
 
 @dataclass
 class Subframe4_Word4:
-    erd3_lsb = [ 0, 0, 0, 0 ]
-    erd4 = [ 0, 0, 0, 0, 0, 0 ]
-    erd5 = [ 0, 0, 0, 0, 0, 0 ]
-    erd6 = [ 0, 0, 0, 0, 0, 0 ]
-    erd7_msb = [ 0, 0 ]
+    erd3_lsb = random_bits(4)
+    erd4 = random_bits(6)
+    erd5 = random_bits(6)
+    erd6 = random_bits(6)
+    erd7_msb = random_bits(2)
     parity: list[int] # 6 bits
 
     def __init__(self, D29, D30):
@@ -66,11 +66,11 @@ class Subframe4_Word4:
 
 @dataclass
 class Subframe4_Word5:
-    erd7_lsb = [ 0, 0, 0, 0 ]
-    erd8 = [ 0, 0, 0, 0, 0, 0 ]
-    erd9 = [ 0, 0, 0, 0, 0, 0 ]
-    erd10 = [ 0, 0, 0, 0, 0, 0 ]
-    erd11_msb = [ 0, 0 ]
+    erd7_lsb = random_bits(4)
+    erd8 = random_bits(6)
+    erd9 = random_bits(6)
+    erd10 = random_bits(6)
+    erd11_msb = random_bits(2)
     parity: list[int] # 6 bits
 
     def __init__(self, D29, D30):
@@ -78,11 +78,11 @@ class Subframe4_Word5:
 
 @dataclass
 class Subframe4_Word6:
-    erd11_lsb = [ 0, 0, 0, 0 ]
-    erd12 = [ 0, 0, 0, 0, 0, 0 ]
-    erd13 = [ 0, 0, 0, 0, 0, 0 ]
-    erd14 = [ 0, 0, 0, 0, 0, 0 ]
-    erd15_msb = [ 0, 0 ]
+    erd11_lsb = random_bits(4)
+    erd12 = random_bits(6)
+    erd13 = random_bits(6)
+    erd14 = random_bits(6)
+    erd15_msb = random_bits(2)
     parity: list[int] # 6 bits
 
     def __init__(self, D29, D30):
@@ -90,11 +90,11 @@ class Subframe4_Word6:
 
 @dataclass
 class Subframe4_Word7:
-    erd15_lsb = [ 0, 0, 0, 0 ]
-    erd16 = [ 0, 0, 0, 0, 0, 0 ]
-    erd17 = [ 0, 0, 0, 0, 0, 0 ]
-    erd18 = [ 0, 0, 0, 0, 0, 0 ]
-    erd19_msb = [ 0, 0 ]
+    erd15_lsb = random_bits(4)
+    erd16 = random_bits(6)
+    erd17 = random_bits(6)
+    erd18 = random_bits(6)
+    erd19_msb = random_bits(2)
     parity: list[int] # 6 bits
 
     def __init__(self, D29, D30):
@@ -102,11 +102,11 @@ class Subframe4_Word7:
 
 @dataclass
 class Subframe4_Word8:
-    erd19_lsb = [ 0, 0, 0, 0 ]
-    erd20 = [ 0, 0, 0, 0, 0, 0 ]
-    erd21 = [ 0, 0, 0, 0, 0, 0 ]
-    erd22 = [ 0, 0, 0, 0, 0, 0 ]
-    erd23_msb = [ 0, 0 ]
+    erd19_lsb = random_bits(4)
+    erd20 = random_bits(6)
+    erd21 = random_bits(6)
+    erd22 = random_bits(6)
+    erd23_msb = random_bits(2)
     parity: list[int] # 6 bits
 
     def __init__(self, D29, D30):
@@ -114,11 +114,11 @@ class Subframe4_Word8:
 
 @dataclass
 class Subframe4_Word9:
-    erd23_lsb = [ 0, 0, 0, 0 ]
-    erd24 = [ 0, 0, 0, 0, 0, 0 ]
-    erd25 = [ 0, 0, 0, 0, 0, 0 ]
-    erd26 = [ 0, 0, 0, 0, 0, 0 ]
-    erd27_msb = [ 0, 0 ]
+    erd23_lsb = random_bits(4)
+    erd24 = random_bits(6)
+    erd25 = random_bits(6)
+    erd26 = random_bits(6)
+    erd27_msb = random_bits(2)
     parity: list[int] # 6 bits
 
     def __init__(self, D29, D30):
@@ -126,11 +126,11 @@ class Subframe4_Word9:
 
 @dataclass
 class Subframe4_Word10:
-    erd27_lsb = [ 0, 0, 0, 0 ]
-    erd28 = [ 0, 0, 0, 0, 0, 0 ]
-    erd29 = [ 0, 0, 0, 0, 0, 0 ]
-    erd30 = [ 0, 0, 0, 0, 0, 0 ]
-    unknown = [ 0, 0 ]
+    erd27_lsb = random_bits(4)
+    erd28 = random_bits(6)
+    erd29 = random_bits(6)
+    erd30 = random_bits(6)
+    unknown = random_bits(2)
     parity: list[int] # 6 bits
 
     def __init__(self, D29, D30):

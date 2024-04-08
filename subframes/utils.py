@@ -1,4 +1,5 @@
 from datetime import datetime, timedelta
+from random import randint
 
 ZERO_POINT = datetime.strptime('1980-01-06T00:00Z', '%Y-%m-%dT%H:%MZ')
 TOTAL_LEAP_SECONDS_UNTIL_NOW = 18
@@ -33,3 +34,6 @@ def calculate_parity_bits(data_bits, previous_D29, previous_D30, first_word=Fals
 
 def int_to_bits(n, bits):
     return [int(x) for x in list(f'{n:0{bits}b}')][:bits]
+
+def random_bits(bits):
+    return [int(x) for x in list(f'{randint(0, 2**bits):0{bits}b}')][:bits]
