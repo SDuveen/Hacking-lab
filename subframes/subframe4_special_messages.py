@@ -20,7 +20,7 @@ def create_subframe4_special_messages(page, date):
 @dataclass
 class Subframe4_Word1:
     preamble          = [ 1, 0, 0, 0, 1, 0, 1, 1 ]
-    reserved          = [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ]
+    reserved          = random_bits(16)
     parity: list[int] # 6 bits
 
     def __init__(self):
