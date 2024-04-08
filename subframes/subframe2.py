@@ -1,8 +1,8 @@
 from dataclasses import dataclass
 from .utils import calculate_parity_bits, gps_time, int_to_bits
 
-def create_subframe2():
-    week_number, time_of_week = gps_time()
+def create_subframe2(date):
+    week_number, time_of_week = gps_time(date)
 
     word1 = Subframe2_Word1()
     word2 = Subframe2_Word2(time_of_week, [0, 0], word1.parity[-2], word1.parity[-1])

@@ -1,8 +1,8 @@
 from dataclasses import dataclass
 from .utils import calculate_parity_bits, gps_time, int_to_bits
 
-def create_subframe1(t_gd, a_f2, a_f1, a_f0):
-    week_number, time_of_week = gps_time()
+def create_subframe1(date):
+    week_number, time_of_week = gps_time(date)
 
     word1 = Subframe1_Word1()
     word2 = Subframe1_Word2(time_of_week, [ 0, 0 ], word1.parity[-2], word1.parity[-1])
@@ -10,10 +10,10 @@ def create_subframe1(t_gd, a_f2, a_f1, a_f0):
     word4 = Subframe1_Word4(word3.parity[-2], word3.parity[-1])
     word5 = Subframe1_Word5(word4.parity[-2], word4.parity[-1])
     word6 = Subframe1_Word6(word5.parity[-2], word5.parity[-1])
-    word7 = Subframe1_Word7(t_gd, word6.parity[-2], word6.parity[-1])
+    word7 = Subframe1_Word7(word6.parity[-2], word6.parity[-1])
     word8 = Subframe1_Word8(word7.parity[-2], word7.parity[-1])
-    word9 = Subframe1_Word9(a_f2, a_f1, word8.parity[-2], word8.parity[-1])
-    word10 = Subframe1_Word10(a_f0, [ 0, 0 ], word9.parity[-2], word9.parity[-1])
+    word9 = Subframe1_Word9(word8.parity[-2], word8.parity[-1])
+    word10 = Subframe1_Word10([ 0, 0 ], word9.parity[-2], word9.parity[-1])
 
     return Subframe1(word1, word2, word3, word4, word5, word6, word7, word8, word9, word10)
 
@@ -81,11 +81,10 @@ class Subframe1_Word6:
 @dataclass
 class Subframe1_Word7:
     reserved = [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ]
-    t_gd:       list[int] # 8 bits
+    t_gd = [ 0, 0, 0, 0, 0, 0, 0, 0 ]
     parity:     list[int] # 6 bits
 
-    def __init__(self, t_gd, D29, D30):
-        self.t_gd = int_to_bits(t_gd, 8)
+    def __init__(self, D29, D30):
         self.parity = calculate_parity_bits(data_bits=self.reserved + self.t_gd, previous_D29=D29, previous_D30=D30, first_word=False)
 
 @dataclass
@@ -99,23 +98,20 @@ class Subframe1_Word8:
 
 @dataclass
 class Subframe1_Word9:
-    a_f2:   list[int] # 8 bits
-    a_f1:   list[int] # 16 bits
+    a_f2 = [ 0, 0, 0, 0, 0, 0, 0, 0 ]
+    a_f1 = [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ]
     parity: list[int] # 6 bits
 
-    def __init__(self, a_f2, a_f1, D29, D30):
-        self.a_f2 = int_to_bits(a_f2, 8)
-        self.a_f1 = int_to_bits(a_f1, 16)
+    def __init__(self, D29, D30):
         self.parity = calculate_parity_bits(data_bits=self.a_f2 + self.a_f1, previous_D29=D29, previous_D30=D30, first_word=False)
 
 @dataclass
 class Subframe1_Word10:
-    a_f0:        list[int] # 22 bits
+    a_f0 = [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ]
     parity_bits: list[int] # 2 bits
     parity:      list[int] # 6 bits
 
-    def __init__(self, a_f0, parity_bits, D29, D30):
-        self.a_f0 = int_to_bits(a_f0, 22)
+    def __init__(self, parity_bits, D29, D30):
         self.parity_bits = parity_bits
         self.parity = calculate_parity_bits(data_bits=self.a_f0 + self.parity_bits, previous_D29=D29, previous_D30=D30, first_word=False)
 
